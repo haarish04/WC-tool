@@ -8,7 +8,6 @@ Wc (short for word count) is a command in Unix that calculates a file's word, li
 
 ## Usage
 
-
 The wc tool supports the following options:
 
 - `-c` ouputs the number of bytes in a file
@@ -16,4 +15,4 @@ The wc tool supports the following options:
 - `-w` ouputs the number of words in a file
 - `-m` ouputs the number of characters in a file
 
-When no options are provided, the output is the equivalent to the -c, -l, and -w options.
+When no options are provided, all the functions are executed and all the statistics are prsented
