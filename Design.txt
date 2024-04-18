@@ -11,3 +11,21 @@ npm run start -- [-option] [file]
 npm run start -- -l test.txt
 
 app.ts is the starting point of the application, send the operation and filepath as parameter to the WC funtion in index.ts file.
+
+Saw some solution using async/ await for the starter function. Don't think I need to use that since the app has only one functionality (all operations on the file)
+
+There are two options to read file using, either using fs.readFileSync or using bytestreams. Bytestreams is preferred in working with large files as normal ReadFileSync involves storing the entire file in a local variable. Performing operations on this can take time and it also uses up lot of memory.
+I have used bytestreams to read the file
+
+Since I am using readStreams I need to make the readStream as async and buffer to not cause overhead.
+
+Using readStream, I declare an event listener on the node.js. 
+Using .on(data , (chunk) => {}), I create a method to listen to the 'data' event. The chunk refers to the stream of data that is coming from the stream.
+Each time a chunk is ready, the callback function is executed. The advantage of these streams is its part of the streams API and hence executes in a non-blocking way
+
+
+For wordCount, a simple .split(" ") could've worked, but I wanted to use regex to strictly take into account only words with this I get rid of punctuation marks
+
+    //const words = chunk.toString().split(" "); This does not factor in punctuation marks
+    //const words = chunk.toString().split(/\s+/);
+
