@@ -1,5 +1,6 @@
 import * as fs from "fs";
 import { Readable } from "stream";
+import { Buffer } from "buffer";
 
 function displayFile(file: Readable): void {
   file.on("data", (chunk) => {
@@ -13,6 +14,7 @@ function wordCount(file: Readable): number {
     const words = chunk.toString().match(/[a-zA-Z0-9]+/g);
     wordcount += words.length;
   });
+  console.log(wordcount);
   return wordcount;
 }
 
@@ -26,18 +28,36 @@ function byteCount(file: Readable): number {
   file.on("data", (chunk) => {
     bytecount += Buffer.byteLength(chunk);
   });
+  console.log(bytecount);
   return bytecount;
 }
 
-function characterCount(file: Readable): number {
-  var charcount = 0;
-  file.on("data", (chunk) => {
-    charcount += chunk.toString().length;
+async function characterCount(file: Readable): Promise<number> {
+  return new Promise((resolve, reject) => {
+    let charcount = 0;
+    file.on("data", (chunk) => {
+      charcount += chunk.toString().length;
+    });
+    file.on("end", () => {
+      resolve(charcount);
+    });
+    file.on("error", (err) => {
+      reject(err);
+    });
   });
-  return charcount;
 }
 
-export default function WC(operation: string, filePath: string): string {
+export default async function WC(
+  operation: string,
+  filePath: string
+): Promise<String> {
   const file = fs.createReadStream(filePath, "utf8");
-  return "";
+  try {
+    const res = await characterCount(file);
+    console.log(res);
+    return res.toString();
+  } catch (err) {
+    console.log(err);
+    return "error";
+  }
 }

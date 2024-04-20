@@ -29,3 +29,4 @@ For wordCount, a simple .split(" ") could've worked, but I wanted to use regex t
     //const words = chunk.toString().split(" "); This does not factor in punctuation marks
     //const words = chunk.toString().split(/\s+/);
 
+Ok big issue in program. The file.on and the chunks being promises under the hood and non-blocking means that the program doesnt wait for the chunks to come and returns the count value 0 for every function. Need to handle the aync and await for program to wait for the chunks to appear and then update the count value of the respective function before printing
