@@ -33,3 +33,7 @@ Ok big issue in program. The file.on and the chunks being promises under the hoo
 Wrapped the functions inside a promise and used the await keyword to wait for the chunks to come in the main function
 
 Had to wrap main function also in async and await as the WC function sent a promise pending response to the main function and the main function is waiting for the response to be returned
+
+For the lineCount had to match string to keep track of line breaks in the file, on windows machine the line break is \r\n and on linux it is \n and macOS is \r so I put or condition | to consider all systems
+Initially thought of implementing sentence count using . as regex pattern but that is not line count.
+Encountered stupid error while using regex, when I used .split(/\r\n | \r | \n/); the space I gave in the pattern was also being considered. To fix this I used split(/\r\n|\r|\n/);

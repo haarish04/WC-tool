@@ -8,21 +8,27 @@ function displayFile(file: Readable): void {
   });
 }
 
-function wordCount(file: Readable): number {
-  var wordcount = 0;
-  file.on("data", (chunk) => {
-    const words = chunk.toString().match(/[a-zA-Z0-9]+/g);
-    wordcount += words.length;
+async function wordCount(file: Readable): Promise<number> {
+  return new Promise((resolve, reject) => {
+    var wordcount = 0;
+    file.on("data", (chunk) => {
+      const words = chunk.toString().match(/[a-zA-Z0-9]+/g);
+      wordcount += words.length;
+    });
+    file.on("end", () => {
+      resolve(wordcount);
+    });
+    file.on("error", (err) => {
+      reject(err);
+    });
   });
-  console.log(wordcount);
-  return wordcount;
 }
 
 async function lineCount(file: Readable): Promise<number> {
   return new Promise((resolve, reject) => {
     let linecount = 0;
     file.on("data", (chunk) => {
-      var Line = chunk.toString().split(/\r\n | \r | \n/);
+      var Line = chunk.toString().split(/\r\n|\r|\n/);
       linecount += Line.length;
     });
     file.on("end", () => {
@@ -34,13 +40,19 @@ async function lineCount(file: Readable): Promise<number> {
   });
 }
 
-function byteCount(file: Readable): number {
-  var bytecount = 0;
-  file.on("data", (chunk) => {
-    bytecount += Buffer.byteLength(chunk);
+async function byteCount(file: Readable): Promise<number> {
+  return new Promise((resolve, reject) => {
+    var bytecount = 0;
+    file.on("data", (chunk) => {
+      bytecount += Buffer.byteLength(chunk);
+    });
+    file.on("end", () => {
+      resolve(bytecount);
+    });
+    file.on("error", (err) => {
+      reject(err);
+    });
   });
-  console.log(bytecount);
-  return bytecount;
 }
 
 async function characterCount(file: Readable): Promise<number> {
