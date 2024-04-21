@@ -18,9 +18,20 @@ function wordCount(file: Readable): number {
   return wordcount;
 }
 
-function lineCount(file: Readable): number {
-  var linecount = 0;
-  return linecount;
+async function lineCount(file: Readable): Promise<number> {
+  return new Promise((resolve, reject) => {
+    let linecount = 0;
+    file.on("data", (chunk) => {
+      var Line = chunk.toString().split(/\r\n | \r | \n/);
+      linecount += Line.length;
+    });
+    file.on("end", () => {
+      resolve(linecount);
+    });
+    file.on("error", (err) => {
+      reject(err);
+    });
+  });
 }
 
 function byteCount(file: Readable): number {
