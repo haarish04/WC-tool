@@ -30,3 +30,6 @@ For wordCount, a simple .split(" ") could've worked, but I wanted to use regex t
     //const words = chunk.toString().split(/\s+/);
 
 Ok big issue in program. The file.on and the chunks being promises under the hood and non-blocking means that the program doesnt wait for the chunks to come and returns the count value 0 for every function. Need to handle the aync and await for program to wait for the chunks to appear and then update the count value of the respective function before printing
+Wrapped the functions inside a promise and used the await keyword to wait for the chunks to come in the main function
+
+Had to wrap main function also in async and await as the WC function sent a promise pending response to the main function and the main function is waiting for the response to be returned

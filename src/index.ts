@@ -54,7 +54,6 @@ export default async function WC(
   const file = fs.createReadStream(filePath, "utf8");
   try {
     const res = await characterCount(file);
-    console.log(res);
     return res.toString();
   } catch (err) {
     console.log(err);

@@ -1,10 +1,10 @@
 import WC from ".";
 
-function main() {
+async function main() {
   var filePath = process.argv[3];
   var operation = process.argv[2];
 
-  const res = WC(operation, filePath);
+  const res = await WC(operation, filePath);
   console.log(res);
 }
 
