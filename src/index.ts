@@ -103,15 +103,16 @@ export default async function WC(
       return res;
 
     case "all":
-      var bytecount = await byteCount(file);
-      var linecount = await lineCount(file);
-      var wordcount = await wordCount(file);
-      var charcount = await characterCount(file);
-
+      var [bytecount, linecount, wordcount, charcount] = await Promise.all([
+        byteCount(file),
+        lineCount(file),
+        wordCount(file),
+        characterCount(file),
+      ]);
       res = `Byte count in file ${filePath} : ${bytecount}\nLine count in file ${filePath} : ${linecount}\nWord count in file ${filePath} : ${wordcount}\nCharacter count in file ${filePath} : ${charcount}`;
       return res;
 
     default:
-      return "";
+      return "Invalid operation";
   }
 }

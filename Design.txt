@@ -37,3 +37,12 @@ Had to wrap main function also in async and await as the WC function sent a prom
 For the lineCount had to match string to keep track of line breaks in the file, on windows machine the line break is \r\n and on linux it is \n and macOS is \r so I put or condition | to consider all systems
 Initially thought of implementing sentence count using . as regex pattern but that is not line count.
 Encountered stupid error while using regex, when I used .split(/\r\n | \r | \n/); the space I gave in the pattern was also being considered. To fix this I used split(/\r\n|\r|\n/);
+
+Initially in case all I did this:
+    case "all":
+      var bytecount = await byteCount(file);
+      var linecount = await lineCount(file);
+      var wordcount = await wordCount(file);
+      var charcount = await characterCount(file);
+
+Clearly did not work lol, I needed to use promise.all to wait for all the promises to get resolved before the res is returned

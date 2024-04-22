@@ -6,6 +6,12 @@ This application is my solution to the first part of the Coding Challenges serie
 
 Wc (short for word count) is a command in Unix that calculates a file's word, line, character, and/or byte count. The goal was to write wc. wc is contained in `src/app.ts`, and the command line version is contained in `src/index.ts`.
 
+## Build
+
+Import npm packagd using
+
+npm install
+
 ## Usage
 
 The wc tool supports the following options:
@@ -15,4 +21,8 @@ The wc tool supports the following options:
 - `-w` ouputs the number of words in a file
 - `-m` ouputs the number of characters in a file
 
-When no options are provided, all the functions are executed and all the statistics are prsented
+When no options are provided, all the functions are executed and all the statistics are presented
+
+## Run
+
+npm start -- [-option] [-filePath]
