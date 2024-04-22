@@ -75,11 +75,43 @@ export default async function WC(
   filePath: string
 ): Promise<String> {
   const file = fs.createReadStream(filePath, "utf8");
-  try {
-    const res = await characterCount(file);
-    return res.toString();
-  } catch (err) {
-    console.log(err);
-    return "error";
+  file.on("error", (err) => {
+    console.error("An error occurred:", err.message);
+  });
+
+  var res: string = "";
+
+  switch (operation) {
+    case "-c":
+      var bytecount = await byteCount(file);
+      res = `Byte count in file ${filePath} : ${bytecount}`;
+      return res;
+
+    case "-l":
+      var linecount = await lineCount(file);
+      res = `Line count in file ${filePath} : ${linecount}`;
+      return res;
+
+    case "-w":
+      var wordcount = await wordCount(file);
+      res = `Word count in file ${filePath} : ${wordcount}`;
+      return res;
+
+    case "-m":
+      var charcount = await characterCount(file);
+      res = `Character count in file ${filePath} : ${charcount}`;
+      return res;
+
+    case "all":
+      var bytecount = await byteCount(file);
+      var linecount = await lineCount(file);
+      var wordcount = await wordCount(file);
+      var charcount = await characterCount(file);
+
+      res = `Byte count in file ${filePath} : ${bytecount}\nLine count in file ${filePath} : ${linecount}\nWord count in file ${filePath} : ${wordcount}\nCharacter count in file ${filePath} : ${charcount}`;
+      return res;
+
+    default:
+      return "";
   }
 }
