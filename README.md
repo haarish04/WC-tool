@@ -8,7 +8,7 @@ Wc (short for word count) is a command in Unix that calculates a file's word, li
 
 ## Build
 
-Import npm packagd using
+Import npm packages
 
 npm install
 

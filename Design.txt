@@ -46,3 +46,4 @@ Initially in case all I did this:
       var charcount = await characterCount(file);
 
 Clearly did not work lol, I needed to use promise.all to wait for all the promises to get resolved before the res is returned
+
