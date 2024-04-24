@@ -1,4 +1,4 @@
-# Challenge 1 - Build Your Own wc Tool
+# Build Your Own wc Tool
 
 This application is my solution to the first part of the Coding Challenges series by John Crickett. The page to the challenge can be found [here](https://codingchallenges.fyi/challenges/challenge-wc).
 
