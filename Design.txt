@@ -47,3 +47,5 @@ Initially in case all I did this:
 
 Clearly did not work lol, I needed to use promise.all to wait for all the promises to get resolved before the res is returned
 
+The main difference between these 2 approaches is that using seperate async and await for each, makes them run one after the other and hence requires more time to complete. Promise.all on the other hand executes them parallely and also takes into account fail fast (if one fails the entire call fails and comes out)
+Use promise.all except cases where there is data dependency
