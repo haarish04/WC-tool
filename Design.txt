@@ -13,6 +13,7 @@ npm run start -- -l test.txt
 app.ts is the starting point of the application, send the operation and filepath as parameter to the WC funtion in index.ts file.
 
 Saw some solution using async/ await for the starter function. Don't think I need to use that since the app has only one functionality (all operations on the file)
+Oops, I HAVE to use async/await as I am using async functions to read the data chunks and calculate count so I need await to wait for the promise to return with the count, else I get 0
 
 There are two options to read file using, either using fs.readFileSync or using bytestreams. Bytestreams is preferred in working with large files as normal ReadFileSync involves storing the entire file in a local variable. Performing operations on this can take time and it also uses up lot of memory.
 I have used bytestreams to read the file
