@@ -24,6 +24,7 @@ Using readStream, I declare an event listener on the node.js.
 Using .on(data , (chunk) => {}), I create a method to listen to the 'data' event. The chunk refers to the stream of data that is coming from the stream.
 Each time a chunk is ready, the callback function is executed. The advantage of these streams is its part of the streams API and hence executes in a non-blocking way
 
+<-------------------------------------------------------------------------->
 
 For wordCount, a simple .split(" ") could've worked, but I wanted to use regex to strictly take into account only words with this I get rid of punctuation marks
 
@@ -38,6 +39,8 @@ Had to wrap main function also in async and await as the WC function sent a prom
 For the lineCount had to match string to keep track of line breaks in the file, on windows machine the line break is \r\n and on linux it is \n and macOS is \r so I put or condition | to consider all systems
 Initially thought of implementing sentence count using . as regex pattern but that is not line count.
 Encountered stupid error while using regex, when I used .split(/\r\n | \r | \n/); the space I gave in the pattern was also being considered. To fix this I used split(/\r\n|\r|\n/);
+
+<-------------------------------------------------------------------------->
 
 Initially in case all I did this:
     case "all":
